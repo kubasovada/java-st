@@ -8,10 +8,8 @@ public class MyFirstProgram {
 
         Point p1 = new Point(6, 2);
         Point p2 = new Point(9, 6);
-        p2.x = 9;
-        p2.y = 6;
         System.out.println("Вариант 3 при помощи метода");
-        System.out.println("Расстояние между двумя точками с координатами " + "("+p1.x+";"+ p1.y +")"+ " и " + "("+ p2.x + ";" + p2.y + ")" + " = " + p1.distance(p2.x, p2.y));
+        System.out.println("Расстояние между двумя точками с координатами " + "("+p1.x+";"+ p1.y +")"+ " и " + "("+ p2.x + ";" + p2.y + ")" + " = " + p1.distance(p2));
 
 //        Square s = new Square(5);
 //        System.out.println("Площадь квадрата со стороной " + s.l + " = " + s.area());
