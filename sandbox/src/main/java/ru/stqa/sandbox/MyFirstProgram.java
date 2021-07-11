@@ -1,16 +1,15 @@
 package ru.stqa.sandbox;
 
+import java.sql.SQLOutput;
+
 public class MyFirstProgram {
 
     public static void main(String[] args) {
 
-        Point p1 = new Point();
-        p1.x = 6;
-        p1.y = 2;
-        Point p2 = new Point();
-        p2.x = 9;
-        p2.y = 6;
-        System.out.println("Расстояние между думя точками с координатами " + "("+p1.x+";"+ p1.y +")"+ " и " + "("+ p2.x + ";" + p2.y + ")" + " = " + distance(p1, p2));
+        Point p1 = new Point(6, 2);
+        Point p2 = new Point(9, 6);
+        System.out.println("Вариант 2 с конструктором");
+        System.out.println("Расстояние между двумя точками с координатами " + "("+p1.x+";"+ p1.y +")"+ " и " + "("+ p2.x + ";" + p2.y + ")" + " = " + distance(p1, p2));
 
 //        Square s = new Square(5);
 //        System.out.println("Площадь квадрата со стороной " + s.l + " = " + s.area());
