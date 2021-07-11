@@ -1,0 +1,15 @@
+package ru.stqa.sandbox;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class SquareTests {
+
+  // аннотация перед методом. особые классы как псевдокомментарии
+  @Test
+  public void testArea() {
+    Square s = new Square(5);
+    Assert.assertEquals(s.area(), 25.0);
+
+  }
+}

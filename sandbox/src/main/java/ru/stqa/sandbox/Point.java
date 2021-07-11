@@ -12,7 +12,7 @@ public class Point {
 
   // метод
   public double distance (Point other) {
-    return Math.sqrt(Math.pow((this.x-x), 2) + Math.pow((this.y-y), 2));
+    return Math.sqrt(Math.pow((x-this.x), 2) + Math.pow((y-this.y), 2));
   }
 }
 
