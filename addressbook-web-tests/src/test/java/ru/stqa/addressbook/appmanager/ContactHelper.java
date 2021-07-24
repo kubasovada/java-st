@@ -22,4 +22,17 @@ public class ContactHelper extends HelperBase {
   }
 
 
+  public void selectContact() {
+    click(By.xpath("//td[@class='center']//input[@name='selected[]']"));
+  }
+
+  public void deleteSelectedContact() {
+
+    click(By.xpath("//input[@value='Delete']"));
+
+  }
+
+  public void acceptAlert() {
+    wd.switchTo().alert().accept();
+  }
 }
