@@ -6,7 +6,8 @@ import ru.stqa.addressbook.model.ContactData;
 
 public class ContactHelper extends HelperBase {
 
-  public ContactHelper(ChromeDriver wd) {
+  public ContactHelper (ChromeDriver wd) {
+
     super(wd);
   }
 
@@ -23,7 +24,7 @@ public class ContactHelper extends HelperBase {
 
 
   public void selectContact() {
-    click(By.xpath("//td[@class='center']//input[@name='selected[]']"));
+    click(By.name("selected[]"));
   }
 
   public void deleteSelectedContact() {
