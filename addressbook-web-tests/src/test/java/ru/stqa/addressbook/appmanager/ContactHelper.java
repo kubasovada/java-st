@@ -36,4 +36,12 @@ public class ContactHelper extends HelperBase {
   public void acceptAlert() {
     wd.switchTo().alert().accept();
   }
+
+  public void initContactModification() {
+    click(By.xpath("//img[@alt='Edit']"));
+  }
+
+  public void updateContactInfo() {
+    click(By.xpath("//div[@id='content']/form/input[22]"));
+  }
 }
