@@ -10,7 +10,6 @@ import ru.stqa.addressbook.model.ContactData;
 public class ContactHelper extends HelperBase {
 
   public ContactHelper (WebDriver wd) {
-
     super(wd);
   }
 
@@ -53,5 +52,16 @@ public class ContactHelper extends HelperBase {
 
   public void updateContactInfo() {
     click(By.xpath("//div[@id='content']/form/input[22]"));
+  }
+
+  public void createContact(ContactData contact) {
+    app.getNavigationHelper().gotoAddContactPage();
+    fillContactForm(contact, true);
+    submitContactCreation();
+    app.getNavigationHelper().goToHomePage();
+  }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
   }
 }

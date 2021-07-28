@@ -27,6 +27,9 @@ public class NavigationHelper extends HelperBase{
   }
 
   public void gotoAddContactPage() {
+    if (isElementPresent(By.xpath("//input[@value='Enter']"))) {
+      return;
+    }
     click(By.linkText("add new"));
   }
 }
