@@ -8,9 +8,11 @@ import org.testng.Assert;
 import ru.stqa.addressbook.model.ContactData;
 
 public class ContactHelper extends HelperBase {
+  ApplicationManager manager;
 
-  public ContactHelper (WebDriver wd) {
-    super(wd);
+  public ContactHelper (ApplicationManager manager) {
+    super(manager.wd);
+    this.manager = manager;
   }
 
   public void fillContactForm(ContactData contactData, boolean creation) {
@@ -55,10 +57,10 @@ public class ContactHelper extends HelperBase {
   }
 
   public void createContact(ContactData contact) {
-    app.getNavigationHelper().gotoAddContactPage();
+    manager.getNavigationHelper().gotoAddContactPage();
     fillContactForm(contact, true);
     submitContactCreation();
-    app.getNavigationHelper().goToHomePage();
+    manager.getNavigationHelper().goToHomePage();
   }
 
   public boolean isThereAContact() {
