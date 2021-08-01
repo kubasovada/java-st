@@ -21,7 +21,7 @@ public class Collections {
       System.out.println("Я хочу выучить " + l);
     }
     for (int i = 0; i < lans.size(); i++) {
-      System.out.println("Я хочу выучить " + languages.get(i));
+      System.out.println("Я хочу выучить " + lans.get(i));
     }
   }
 }
