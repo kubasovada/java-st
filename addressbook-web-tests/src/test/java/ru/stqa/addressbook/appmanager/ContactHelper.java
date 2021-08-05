@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.addressbook.model.ContactData;
 
+import java.util.List;
+
 public class ContactHelper extends HelperBase {
   ApplicationManager manager;
 
@@ -34,7 +36,8 @@ public class ContactHelper extends HelperBase {
   }
 
 
-  public void selectContact() {
+  public void selectContact( int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
     click(By.name("selected[]"));
   }
 
@@ -70,4 +73,9 @@ public class ContactHelper extends HelperBase {
   public int getContactCount() {
     return wd.findElements(By.name("selected[]")).size();
   }
+
+  public List getContactList() {
+    return wd.findElements(By.name("selected[]"));
+  }
+
 }
