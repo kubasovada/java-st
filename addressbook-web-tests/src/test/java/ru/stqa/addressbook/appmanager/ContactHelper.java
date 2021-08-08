@@ -90,9 +90,4 @@ public class ContactHelper extends HelperBase {
     return contacts;
   }
 
-  public List getElements() {
-    List<WebElement> elements = wd.findElements(By.name("entry"));
-    return  elements;
-
-  }
 }
