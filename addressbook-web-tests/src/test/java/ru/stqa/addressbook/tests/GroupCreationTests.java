@@ -5,21 +5,20 @@ import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.GroupData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class GroupCreationTests extends TestBase {
 
   @Test
   public void testGroupCreation() throws Exception {
-    app.getNavigationHelper().gotoGroupPage();
+    app.goTo().groupPage();
     //int before = app.getGroupHelper().getGroupCount();
     // Переменная before содержала количество эл-в, теперь будет содержать список объектов типа GrD
-    List<GroupData> before = app.getGroupHelper().getGroupList();
+    List<GroupData> before = app.group().list();
     GroupData group = new GroupData("test1111", "test2", "test3");
-    app.getGroupHelper().createGroup(group);
+    app.group().create(group);
     //int after = app.getGroupHelper().getGroupCount();
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    List<GroupData> after = app.group().list();
     Assert.assertEquals(after.size(), before.size() + 1);
 
 
