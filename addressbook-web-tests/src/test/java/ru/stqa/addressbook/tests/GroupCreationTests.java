@@ -15,7 +15,7 @@ public class GroupCreationTests extends TestBase {
     //int before = app.getGroupHelper().getGroupCount();
     // Переменная before содержала количество эл-в, теперь будет содержать список объектов типа GrD
     List<GroupData> before = app.group().list();
-    GroupData group = new GroupData("test1111", "test2", "test3");
+    GroupData group = new GroupData().withName("test2");
     app.group().create(group);
     //int after = app.getGroupHelper().getGroupCount();
     List<GroupData> after = app.group().list();

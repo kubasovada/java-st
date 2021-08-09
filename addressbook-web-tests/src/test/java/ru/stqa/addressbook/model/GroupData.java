@@ -3,25 +3,29 @@ package ru.stqa.addressbook.model;
 import java.util.Objects;
 
 public class GroupData {
-  private int id;
+  private int id = Integer.MAX_VALUE;
   private String name;
   private String header;
   private String footer;
 
-  public void withName(String name) {
+  public GroupData withName(String name) {
     this.name = name;
+    return this;
   }
 
-  public void withHeader(String header) {
+  public GroupData withHeader(String header) {
     this.header = header;
+    return this;
   }
 
-  public void withFooter(String footer) {
+  public GroupData withFooter(String footer) {
     this.footer = footer;
+    return this;
   }
 
-  public void withId(int id) {
+  public GroupData withId(int id) {
     this.id = id;
+    return this;
   }
 
   @Override
@@ -49,19 +53,6 @@ public class GroupData {
   @Override
   public int hashCode() {
     return Objects.hash(name);
-  }
-
-  public GroupData(String name, String header, String footer) {
-    this.id = Integer.MAX_VALUE;
-    this.name = name;
-    this.header = header;
-    this.footer = footer;
-  }
-  public GroupData(int id, String name, String header, String footer) {
-    this.id = id;
-    this.name = name;
-    this.header = header;
-    this.footer = footer;
   }
 
   public String getName() {
