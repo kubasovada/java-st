@@ -4,9 +4,25 @@ import java.util.Objects;
 
 public class GroupData {
   private int id;
-  private final String name;
-  private final String header;
-  private final String footer;
+  private String name;
+  private String header;
+  private String footer;
+
+  public void withName(String name) {
+    this.name = name;
+  }
+
+  public void withHeader(String header) {
+    this.header = header;
+  }
+
+  public void withFooter(String footer) {
+    this.footer = footer;
+  }
+
+  public void withId(int id) {
+    this.id = id;
+  }
 
   @Override
   public String toString() {
@@ -20,9 +36,7 @@ public class GroupData {
     return id;
   }
 
-  public void setId(int id) {
-    this.id = id;
-  }
+
 
   @Override
   public boolean equals(Object o) {
