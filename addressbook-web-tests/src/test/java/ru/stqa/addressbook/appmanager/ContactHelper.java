@@ -66,6 +66,13 @@ public class ContactHelper extends HelperBase {
     manager.goTo().goToHomePage();
   }
 
+  public void modifyContact(int index, ContactData contact) {
+    initContactModification(index);
+    fillContactForm(contact, false);
+    updateContactInfo();
+    manager.goTo().goToHomePage();
+  }
+
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
   }

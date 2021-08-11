@@ -1,6 +1,7 @@
 package ru.stqa.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.ContactData;
 
@@ -8,20 +9,21 @@ import java.util.*;
 
 public class ContactModificationTests extends TestBase{
 
-  @Test(enabled = true)
-  public void testContactModification() {
+  @BeforeMethod
+  public void ensurePreconditions() {
     app.goTo().goToHomePage();
-    if (! app.getContactHelper().isThereAContact()) {
+    if (!app.getContactHelper().isThereAContact()) {
       app.getContactHelper().createContact(new ContactData("test1", "test2", "79999121000", "email@amail.com", "test1"));
     }
+  }
+
+  @Test(enabled = true)
+  public void testContactModification() {
+
     List<ContactData> before = app.getContactHelper().getContactList();
-    //app.getContactHelper().selectContact(before.size() - 1);
     int index = before.size() - 1;
-    app.getContactHelper().initContactModification(index);
     ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "имяМ1", "фамилияМ1", "8800555666777", "newcontact@email.com", null);
-    app.getContactHelper().fillContactForm((contact), false);
-    app.getContactHelper().updateContactInfo();
-    app.goTo().goToHomePage();
+    app.getContactHelper().modifyContact(index, contact);
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(),before.size());
 
@@ -33,4 +35,6 @@ public class ContactModificationTests extends TestBase{
     Assert.assertEquals(before, after);
 
   }
+
+
 }
