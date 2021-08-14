@@ -1,13 +1,10 @@
 package ru.stqa.addressbook.appmanager;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
-
-import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
   WebDriver wd;
@@ -19,12 +16,10 @@ public class ApplicationManager {
   private String browser;
 
   public ApplicationManager(String browser) {
-
     this.browser = browser;
   }
 
   public void init() {
-   // String browser = BrowserType.FIREFOX;
     if (browser.equals(BrowserType.FIREFOX)) {
       wd = new FirefoxDriver();
     } else if (browser.equals(BrowserType.CHROME)) {
@@ -50,15 +45,13 @@ public class ApplicationManager {
     wd.findElement(By.linkText("Logout")).click();
   }
 
-  public GroupHelper group() {
-    return groupHelper;
-  }
+  public GroupHelper group() { return groupHelper;  }
 
   public NavigationHelper goTo() {
     return navigationHelper;
   }
 
-  public ContactHelper getContactHelper() {
+  public ContactHelper contact() {
     return contactHelper;
   }
 }

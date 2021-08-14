@@ -1,9 +1,7 @@
 package ru.stqa.addressbook.tests;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.ContactData;
-
 import java.util.Comparator;
 import java.util.List;
 
@@ -11,11 +9,11 @@ public class ContactCreationTests extends TestBase {
 
   @Test(enabled = true)
   public void testContactCreation() throws Exception {
-    app.goTo().goToHomePage();
-    List<ContactData> before = app.getContactHelper().getContactList();
+    app.goTo().homePage();
+    List<ContactData> before = app.contact().contactList();
     ContactData contact = new ContactData("имя4", "фамилия4", "79999121000", "email@amail.com", "test1");
-    app.getContactHelper().createContact(contact);
-    List<ContactData> after = app.getContactHelper().getContactList();
+    app.contact().createContact(contact);
+    List<ContactData> after = app.contact().contactList();
     Assert.assertEquals(after.size(),before.size() + 1 );
 
     contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
@@ -25,5 +23,4 @@ public class ContactCreationTests extends TestBase {
     after.sort(byId);
     Assert.assertEquals(before, after);
   }
-
 }

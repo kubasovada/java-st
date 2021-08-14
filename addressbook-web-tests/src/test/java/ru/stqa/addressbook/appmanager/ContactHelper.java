@@ -1,18 +1,16 @@
 package ru.stqa.addressbook.appmanager;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.addressbook.model.ContactData;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
   ApplicationManager manager;
 
-  public ContactHelper (ApplicationManager manager) {
+  public ContactHelper(ApplicationManager manager) {
     super(manager.wd);
     this.manager = manager;
   }
@@ -28,7 +26,6 @@ public class ContactHelper extends HelperBase {
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
-
   }
 
   public void submitContactCreation() {
@@ -36,7 +33,7 @@ public class ContactHelper extends HelperBase {
   }
 
 
-  public void selectContact( int index) {
+  public void selectContact(int index) {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
 
@@ -60,17 +57,17 @@ public class ContactHelper extends HelperBase {
   }
 
   public void createContact(ContactData contact) {
-    manager.goTo().gotoAddContactPage();
+    manager.goTo().AddContactPage();
     fillContactForm(contact, true);
     submitContactCreation();
-    manager.goTo().goToHomePage();
+    manager.goTo().homePage();
   }
 
   public void modifyContact(int index, ContactData contact) {
     initContactModification(index);
     fillContactForm(contact, false);
     updateContactInfo();
-    manager.goTo().goToHomePage();
+    manager.goTo().homePage();
   }
 
   public boolean isThereAContact() {
@@ -82,7 +79,7 @@ public class ContactHelper extends HelperBase {
   }
 
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> contactList() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
@@ -93,6 +90,13 @@ public class ContactHelper extends HelperBase {
       contacts.add(contact);
     }
     return contacts;
+  }
+
+  public void delete(int index) {
+    selectContact(index);
+    deleteSelectedContact();
+    acceptAlert();
+    manager.goTo().homePage();
   }
 
 }
