@@ -3,20 +3,64 @@ package ru.stqa.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
-  public void setId(int id) {
+  private int id = Integer.MAX_VALUE;
+  private  String firstname;
+  private  String lastname;
+  private  String mobile;
+  private  String email;
+  private  String group;
+
+  public ContactData withId(int id) {
     this.id = id;
+    return this;
   }
 
-  private int id;
-  private final String firstname;
-  private final String lastname;
-  private final String mobile;
-  private final String email;
-  private String group;
+  public ContactData withFirstname(String firstname) {
+    this.firstname = firstname;
+    return this;
+  }
+
+  public ContactData withLastname(String lastname) {
+    this.lastname = lastname;
+    return this;
+  }
+
+  public ContactData withMobile(String mobile) {
+    this.mobile = mobile;
+    return this;
+  }
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+  }
+
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
+  }
 
   public int getId() {
     return id;
   }
+
+  public String getFirstname() {
+    return firstname;
+  }
+
+  public String getLastname() {
+    return lastname;
+  }
+
+  public String getMobile() {
+    return mobile;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public String getGroup() { return group; }
 
 
   @Override
@@ -41,41 +85,4 @@ public class ContactData {
     return Objects.hash(firstname, lastname);
   }
 
-  public ContactData(String firstname, String lastname, String mobile, String email, String group) {
-    this.id = Integer.MAX_VALUE;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.mobile = mobile;
-    this.email = email;
-    this.group = group;
-  }
-
-  public ContactData(int id, String firstname, String lastname, String mobile, String email, String group) {
-    this.id = id;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.mobile = mobile;
-    this.email = email;
-    this.group = group;
-  }
-
-  public String getFirstname() {
-    return firstname;
-  }
-
-  public String getLastname() {
-    return lastname;
-  }
-
-  public String getMobile() {
-    return mobile;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public String getGroup() {
-    return group;
-  }
 }

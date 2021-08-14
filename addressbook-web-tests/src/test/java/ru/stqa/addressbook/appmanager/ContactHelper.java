@@ -15,6 +15,27 @@ public class ContactHelper extends HelperBase {
     this.manager = manager;
   }
 
+  public void createContact(ContactData contact) {
+    manager.goTo().AddContactPage();
+    fillContactForm(contact, true);
+    submitContactCreation();
+    manager.goTo().homePage();
+  }
+
+  public void modifyContact(int index, ContactData contact) {
+    initContactModification(index);
+    fillContactForm(contact, false);
+    updateContactInfo();
+    manager.goTo().homePage();
+  }
+
+  public void delete(int index) {
+    selectContact(index);
+    deleteSelectedContact();
+    acceptAlert();
+    manager.goTo().homePage();
+  }
+
   public void fillContactForm(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
@@ -32,21 +53,6 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
-
-  public void selectContact(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
-  }
-
-  public void deleteSelectedContact() {
-
-    click(By.xpath("//input[@value='Delete']"));
-
-  }
-
-  public void acceptAlert() {
-    wd.switchTo().alert().accept();
-  }
-
   public void initContactModification(int index) {
     //click(By.xpath("//img[@alt='Edit']"));
     wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
@@ -56,18 +62,14 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[22]"));
   }
 
-  public void createContact(ContactData contact) {
-    manager.goTo().AddContactPage();
-    fillContactForm(contact, true);
-    submitContactCreation();
-    manager.goTo().homePage();
+  public void selectContact(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
-  public void modifyContact(int index, ContactData contact) {
-    initContactModification(index);
-    fillContactForm(contact, false);
-    updateContactInfo();
-    manager.goTo().homePage();
+  public void deleteSelectedContact() { click(By.xpath("//input[@value='Delete']")); }
+
+  public void acceptAlert() {
+    wd.switchTo().alert().accept();
   }
 
   public boolean isThereAContact() {
@@ -86,17 +88,9 @@ public class ContactHelper extends HelperBase {
       String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
       String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
       int id = Integer.parseInt(element.findElement(By.cssSelector("td.center input")).getAttribute("value"));
-      ContactData contact = new ContactData(id, firstname, lastname, null, null, null);
-      contacts.add(contact);
+      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
     }
     return contacts;
-  }
-
-  public void delete(int index) {
-    selectContact(index);
-    deleteSelectedContact();
-    acceptAlert();
-    manager.goTo().homePage();
   }
 
 }
