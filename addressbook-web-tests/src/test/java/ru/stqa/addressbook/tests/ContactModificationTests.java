@@ -10,7 +10,7 @@ public class ContactModificationTests extends TestBase{
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().homePage();
-    if (app.contact().contactList().size() == 0 ) {
+    if (app.contact().all().size() == 0 ) {
       app.contact().createContact(new ContactData()
               .withFirstname("Name1").withLastname("LastName1").withMobile("79997775533").withEmail("email@email.ru").withGroup("test1"));
     }
@@ -18,19 +18,17 @@ public class ContactModificationTests extends TestBase{
 
   @Test(enabled = true)
   public void testContactModification() {
-    List<ContactData> before = app.contact().contactList();
-    int index = before.size() - 1;
-    ContactData contact = new ContactData().withId(before.get(before.size() - 1).getId())
+    Set<ContactData> before = app.contact().all();
+    ContactData modifiedContact = before.iterator().next();
+    ContactData contact = new ContactData().withId(modifiedContact.getId())
             .withFirstname("Name1").withLastname("LastName1").withMobile("79997775533").withEmail("email@email.ru").withGroup("test1");
-    app.contact().modifyContact(index, contact);
-    List<ContactData> after = app.contact().contactList();
+    app.contact().modifyContact(contact);
+    Set<ContactData> after = app.contact().all();
     Assert.assertEquals(after.size(),before.size());
 
-    before.remove(index);
+    before.remove(modifiedContact);
     before.add((contact));
-    Comparator<? super ContactData> byId = (с1,с2) -> Integer.compare(с1.getId(), с2.getId());
-    before.sort(byId);
-    after.sort(byId);
+
     Assert.assertEquals(before, after);
 
     //System.out.println(before.size());
