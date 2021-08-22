@@ -1,11 +1,8 @@
 package ru.stqa.addressbook.generators;
-
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import ru.stqa.addressbook.model.ContactData;
-import ru.stqa.addressbook.model.Contacts;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -42,8 +39,8 @@ public class ContactDataGenerator {
     System.out.println(new File(".").getAbsolutePath());
     Writer writer = new FileWriter(file);
     for (ContactData contact: contacts) {
-      writer.write(String.format("%s;%s;%s;%s;%s;%s\n", contact.getFirstname(), contact.getLastname(),
-              contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(), contact.getEmail()));
+      writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s\n", contact.getFirstname(), contact.getLastname(),
+              contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(), contact.getEmail(), contact.getGroup(), contact.getPhoto()));
     }
     writer.close();
   }
@@ -53,7 +50,7 @@ public class ContactDataGenerator {
     for (int i = 0; i < count; i++) {
       contacts.add(new ContactData().withFirstname(String.format("Firstname %s", i)).withLastname(String.format("Lastname %s", i))
               .withHomePhone(String.format("111-%s", i)).withMobilePhone(String.format("222-%s", i)).withWorkPhone("333")
-              .withEmail(String.format("email%s@email.ru", i)));
+              .withEmail(String.format("email%s@email.ru", i)).withGroup("test1").withPhoto(new File ("src/test/resources/stru.png")));
     }
     return contacts;
   }
