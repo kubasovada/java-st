@@ -1,24 +1,39 @@
 package ru.stqa.addressbook.tests;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.ContactData;
 import ru.stqa.addressbook.model.Contacts;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.StringJoiner;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
-  @Test(enabled = true)
-  public void testContactCreation() throws Exception {
+  @DataProvider
+  public Iterator<Object[]> validContacts() {
+    List<Object[]> list = new ArrayList<Object[]>();
+    list.add(new Object[] {new ContactData().withFirstname("firstname1").withLastname("lastname1").withMobilePhone("79991112233").withWorkPhone("111").withHomePhone("222").withEmail("email1@email.ru").withGroup("test1")});
+    list.add(new Object[] {new ContactData().withFirstname("firstname2").withLastname("lastname2").withMobilePhone("79991112233").withWorkPhone("111").withHomePhone("222").withEmail("email2@email.ru").withGroup("test1")});
+    list.add(new Object[] {new ContactData().withFirstname("firstname3").withLastname("lastname3").withMobilePhone("79991112233").withWorkPhone("111").withHomePhone("222").withEmail("email3@email.ru").withGroup("test1")});
+    return list.iterator();
+  }
+
+
+  @Test(dataProvider = "validContacts")
+  public void testContactCreation(ContactData contact) throws Exception {
+    /* ContactData contact = new ContactData()
+            .withFirstname(firstname).withLastname(lastname)
+            .withMobilePhone(mobilePhone).withWorkPhone(workPhone).withHomePhone(honePhone)
+            .withEmail(email).withGroup(group); */
     app.goTo().homePage();
-    Contacts before =  app.contact().all();
-    File photo =  new File("src/test/resources/stru.png");
-    ContactData contact = new ContactData()
-            .withFirstname("Name1").withLastname("LastName1")
-            .withMobilePhone("79997775533").withWorkPhone("111").withHomePhone("222")
-            .withEmail("email@email.ru").withGroup("test1").withPhoto(photo);
+    Contacts before = app.contact().all();
+    File photo = new File("src/test/resources/stru.png");
     app.contact().createContact(contact);
     assertThat(app.contact().contactCount(), equalTo(before.size() + 1));
     Contacts after = app.contact().all();
@@ -26,6 +41,7 @@ public class ContactCreationTests extends TestBase {
     //mapToInt превращает в поток идентификаторов, целых чисел
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
+
   }
 
   @Test (enabled = false)
