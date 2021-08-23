@@ -1,6 +1,7 @@
 .gradle
 build/
 workspace.xml
+*.log
 
 # Ignore Gradle GUI config
 gradle-app.setting

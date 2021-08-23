@@ -1,29 +1,11 @@
 [
   {
-    "firstname": "FirstnameJson 0",
+    "firstname": "Firstname 0",
     "lastname": "Lastname 0",
     "homePhone": "111-0",
     "mobilePhone": "222-0",
     "workPhone": "333",
     "email": "email0@email.ru",
-    "group": "test1"
-  },
-  {
-    "firstname": "Firstname 1",
-    "lastname": "Lastname 1",
-    "homePhone": "111-1",
-    "mobilePhone": "222-1",
-    "workPhone": "333",
-    "email": "email1@email.ru",
-    "group": "test1"
-  },
-  {
-    "firstname": "Firstname 2",
-    "lastname": "Lastname 2",
-    "homePhone": "111-2",
-    "mobilePhone": "222-2",
-    "workPhone": "333",
-    "email": "email2@email.ru",
     "group": "test1"
   }
 ]
