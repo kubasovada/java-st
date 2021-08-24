@@ -4,7 +4,7 @@
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>test-${bySecond}.log</file>
-        <append>true</append>
+        <!--  <append>true</append> -->
         <!-- set immediateFlush to false for much higher logging throughput -->
         <immediateFlush>true</immediateFlush>
         <!-- encoders are assigned the type
@@ -15,6 +15,9 @@
     </appender>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
         <!-- encoders are assigned the type
              ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
         <encoder>
