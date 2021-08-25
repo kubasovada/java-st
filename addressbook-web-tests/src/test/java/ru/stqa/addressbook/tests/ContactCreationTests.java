@@ -57,15 +57,14 @@ public class ContactCreationTests extends TestBase {
   }
 
 
-
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactData contact) throws Exception {
     app.goTo().homePage();
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     File photo = new File("src/test/resources/stru.png");
     app.contact().createContact(contact);
     assertThat(app.contact().contactCount(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     //contact.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
     //mapToInt превращает в поток идентификаторов, целых чисел
     assertThat(after, equalTo(
@@ -86,12 +85,12 @@ public class ContactCreationTests extends TestBase {
   @Test(enabled = false)
   public void testBadNameContactCreation() throws Exception {
     app.goTo().homePage();
-    Contacts before =  app.contact().all();
+    Contacts before =  app.db().contacts();
     ContactData contact = new ContactData()
             .withFirstname("Name1'").withLastname("LastName1").withMobilePhone("79997775533").withEmail("email@email.ru").withGroup("test1");
     app.contact().createContact(contact);
     assertThat(app.contact().contactCount(), equalTo(before.size()));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(
             before));
   }

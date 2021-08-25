@@ -6,6 +6,21 @@
     "mobilePhone": "222-0",
     "workPhone": "333",
     "email": "email0@email.ru",
+    "email2": "email2-0@email.ru",
+    "email3": "email3-0@email.ru",
+    "homeAddress": "address",
+    "group": "test1"
+  },
+  {
+    "firstname": "Firstname 1",
+    "lastname": "Lastname 1",
+    "homePhone": "111-1",
+    "mobilePhone": "222-1",
+    "workPhone": "333",
+    "email": "email1@email.ru",
+    "email2": "email2-1@email.ru",
+    "email3": "email3-1@email.ru",
+    "homeAddress": "address",
     "group": "test1"
   }
 ]

@@ -1,3 +1,2 @@
-Firstname 0;Lastname 0;111-0;222-0;333;email0@email.ru;test1;src\test\resources\stru.png
-Firstname 1;Lastname 1;111-1;222-1;333;email1@email.ru;test1;src\test\resources\stru.png
-Firstname 2;Lastname 2;111-2;222-2;333;email2@email.ru;test1;src\test\resources\stru.png
+Firstname 0;Lastname 0;111-0;222-0;333;email0@email.ru;email2-0@email.ru;email3-0@email.ru;test1;src\test\resources\stru.png
+Firstname 1;Lastname 1;111-1;222-1;333;email1@email.ru;email2-1@email.ru;email3-1@email.ru;test1;src\test\resources\stru.png
