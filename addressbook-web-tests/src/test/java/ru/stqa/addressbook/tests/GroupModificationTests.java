@@ -27,19 +27,15 @@ public class GroupModificationTests extends TestBase {
 
   @Test
   public  void testGroupModification () {
-    if (Boolean.getBoolean("verifyUI")) {
-      Groups before = app.db().groups();
-      GroupData modifiedGroup = before.iterator().next();
-      GroupData group = new GroupData()
-              .withId(modifiedGroup.getId()).withName("testM").withHeader("test2").withFooter("test3");
-      app.goTo().groupPage();
-      app.group().modify(group);
-      assertThat(app.group().groupCount(), equalTo(before.size()));
-      Groups after = app.db().groups();
-      assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
-      verifyGroupListInUi();
+    Groups before = app.db().groups();
+    GroupData modifiedGroup = before.iterator().next();
+    GroupData group = new GroupData()
+            .withId(modifiedGroup.getId()).withName("testM").withHeader("test2").withFooter("test3");
+    app.goTo().groupPage();
+    app.group().modify(group);
+    assertThat(app.group().groupCount(), equalTo(before.size()));
+    Groups after = app.db().groups();
+    assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
+    verifyGroupListInUi();
     }
-  }
-
-
 }
