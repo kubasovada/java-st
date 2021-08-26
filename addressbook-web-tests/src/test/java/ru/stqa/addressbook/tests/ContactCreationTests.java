@@ -6,6 +6,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.ContactData;
 import ru.stqa.addressbook.model.Contacts;
+import ru.stqa.addressbook.model.Groups;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -85,10 +87,11 @@ public class ContactCreationTests extends TestBase {
 
   @Test(enabled = false)
   public void testBadNameContactCreation() throws Exception {
+    Groups groups = app.db().groups();
+    ContactData contact = new ContactData()
+            .withFirstname("Name1'").withLastname("LastName1").withMobilePhone("79997775533").withEmail("email@email.ru").inGroup(groups.iterator().next());
     app.goTo().homePage();
     Contacts before =  app.db().contacts();
-    ContactData contact = new ContactData()
-            .withFirstname("Name1'").withLastname("LastName1").withMobilePhone("79997775533").withEmail("email@email.ru").withGroup("test1");
     app.contact().createContact(contact);
     assertThat(app.contact().contactCount(), equalTo(before.size()));
     Contacts after = app.db().contacts();

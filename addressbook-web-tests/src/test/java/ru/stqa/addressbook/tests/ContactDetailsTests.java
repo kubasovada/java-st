@@ -2,6 +2,7 @@ package ru.stqa.addressbook.tests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.ContactData;
+import ru.stqa.addressbook.model.Groups;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -14,12 +15,13 @@ public class ContactDetailsTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
+    Groups groups = app.db().groups();
     app.goTo().homePage();
     if (app.db().contacts().size() == 0) {
       app.contact().createContact(new ContactData()
               .withFirstname("Name1").withLastname("LastName1").withMobilePhone("79997775533").withHomePhone("111")
               .withWorkPhone("333").withEmail("email@email.ru").withEmail2("email2").withEmail3("email3")
-              .withHomeAddress("homeAddress").withGroup("test1"));
+              .withHomeAddress("homeAddress").inGroup(groups.iterator().next()));
     }
   }
 
@@ -69,7 +71,5 @@ public class ContactDetailsTests extends TestBase {
   public static String cleanEmail(String email) {
     return email.replaceAll("\'", "").replaceAll("\"", "");
   }
-
-
 
 }
