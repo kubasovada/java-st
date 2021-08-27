@@ -5,6 +5,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.addressbook.model.ContactData;
 import ru.stqa.addressbook.model.Contacts;
+import ru.stqa.addressbook.model.GroupData;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -193,4 +195,38 @@ public class ContactHelper extends HelperBase {
   }
 
 
+  public void addContactToGroup(ContactData contact, GroupData group) {
+    selectContactById(contact.getId());
+    selectGroupByIdForAdd(group);
+    addToGroup();
+    goToGroup();
+
+  }
+
+  private void selectGroupByIdForAdd(GroupData group) {
+    new Select (wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(group.getId()));
+  }
+
+  private void goToGroup() {
+    click(By.partialLinkText("group page"));
+  }
+
+  private void addToGroup() {
+    click(By.name("add"));
+  }
+
+  public void selectGroupForRemove(int groupId) {
+    new Select(wd.findElement(By.name("group"))).selectByValue(String.valueOf(groupId));
+  }
+
+  public void removeContactFromGroup(ContactData contact) {
+    selectContactById(contact.getId());
+    removeContact();
+    goToGroup();
+    contactCache = null;
+  }
+
+  private void removeContact() {
+    click(By.name("remove"));
+  }
 }
