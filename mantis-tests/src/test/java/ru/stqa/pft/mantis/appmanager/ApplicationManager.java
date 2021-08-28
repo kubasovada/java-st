@@ -1,5 +1,5 @@
 package ru.stqa.pft.mantis.appmanager;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -43,8 +43,13 @@ public class ApplicationManager {
     wd.quit();
   }
 
-  public void logout() {
-    wd.findElement(By.linkText("Logout")).click();
+  public HttpSession newSession() {
+    return new HttpSession(this);
+  }
+
+
+  public String getProperty(String key) {
+    return properties.getProperty(key);
   }
 
 }
