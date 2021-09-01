@@ -1,7 +1,5 @@
 package ru.stqa.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.ContactData;
@@ -30,15 +28,14 @@ public class ContactAddToGroupTests extends TestBase{
     }
   }
 
-
   @Test
   public void testAddContactToGroup() {
     app.goTo().homePage();
     ContactData contact = selectContact();
-    Groups before = app.db().groups();
+    Groups before = contact.getGroups();
     GroupData groupForAdd = selectGroup(contact);
     app.contact().addContactToGroup(contact, groupForAdd);
-    Groups after = app.db().groups();
+    Groups after = app.db().getContactsFromDbById(contact.getId()).getGroups();
     assertThat(after, equalTo(before.withAdded(groupForAdd)));
   }
 
