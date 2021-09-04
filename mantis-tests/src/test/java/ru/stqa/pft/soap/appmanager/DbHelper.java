@@ -24,10 +24,10 @@ public class DbHelper {
   public Users users() {
     Session session = sessionFactory.openSession();
     session.beginTransaction();
-    List<UserData> result = session.createQuery("from UserData where not(id = 1)").list();
+    List<UserData> result = session.createQuery("from UserData where not((username = 'administrator') AND (email = 'root@localhost'))").list();
     session.getTransaction().commit();
     session.close();
     return new Users(result);
   }
-
 }
+
