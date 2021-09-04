@@ -34,7 +34,7 @@ public class RegistrationHelper extends HelperBase {
 
   public void resetUserPassword(int id) {
     click(By.cssSelector("button#menu-toggler"));
-    click(By.cssSelector("ul.nav-list> li:nth-child(6)  span.menu-text"));
+    click(By.cssSelector("ul.nav-list> li:nth-child(7)  span.menu-text"));
     click(By.cssSelector("ul.nav-tabs li:nth-child(2)"));
     click(By.cssSelector(String.format("a[href='manage_user_edit_page.php?user_id=%s']", id)));
     //click(By.cssSelector("table.table tr:nth-child(2)>td a"));
