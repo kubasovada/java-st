@@ -31,26 +31,30 @@ public class RestTests {
 
   @Test(enabled = true)
   public  void testStatus() throws IOException {
-    String issStat = getIssueStatus(1280);
+    String issStat = getIssueStatus(80);
     System.out.println(issStat);
   }
 
   private Set<Issue> getIssues() throws IOException {
     String json =  getExecutor().execute(Request.Get("https://bugify.stqa.ru/api/issues.json")).returnContent().asString();
     JsonElement parsed = new JsonParser().parse(json);
-    JsonElement issues = parsed.getAsJsonObject().get("issues");
+    JsonElement issues = parsed.getAsJsonObject().get("issues"); //jsonArray \[{assignee
     return new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType());
   }
 
   private String getIssueStatus(int id) throws IOException {
     String issueById = getExecutor().execute(Request.Get(String.format("https://bugify.stqa.ru/api/issues/%s.json", id))).returnContent().asString(); // {total
     JsonElement parsed = new JsonParser().parse(issueById); //JsonObject {total
-    JsonElement issues = parsed.getAsJsonObject().get("issues"); //JsonArray [{assignee
-    JsonElement state_name = issues.getAsJsonObject().get("state_name");
-    System.out.println(state_name);
+    JsonElement issuesJson = parsed.getAsJsonObject().get("issues"); //JsonArray [{assignee
+    Set<Issue> issues = new Gson().fromJson( issuesJson, new TypeToken<Set<Issue>>(){}.getType());
+    Issue issue = issues.iterator().next();
+    System.out.println(issue);
+    String stateName = issue.getStateName();
+    System.out.println(stateName);
 
 
-    return null;
+    System.out.println("Статус задачи: "+ stateName);
+    return stateName;
   }
 
   private Executor getExecutor() {
@@ -69,7 +73,7 @@ public class RestTests {
   public boolean isIssueOpen(int issueId) throws IOException {
     String issueStatus = getIssueStatus(1280);
     boolean isOpen;
-    if (issueStatus.equals("closed")) {
+    if (issueStatus.equals("Closed")) {
       isOpen = false;
     } else isOpen = true;
     return isOpen;
