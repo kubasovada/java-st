@@ -13,9 +13,10 @@ import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
 
-public class RestTests {
-  @Test(enabled = false)
+public class RestTests extends TestBase {
+  @Test(enabled = true)
   public void testCreateIssue() throws IOException {
+    skipIfNotFixed(1280);
     Set<Issue> oldIssues = getIssues();
     Issue newIssue = new Issue().withSubject("TestIssue").withDescription("new Test Issue");
     int issueId =  createIssue(newIssue);
@@ -24,7 +25,7 @@ public class RestTests {
     assertEquals(newIssues, oldIssues);
   }
 
-  @Test(enabled = true)
+  @Test(enabled = false)
   public  void testStatus() throws IOException {
     String issueStatus = getIssueStatus(1280);
     System.out.println("Статус задачи: "+ issueStatus);
@@ -37,20 +38,6 @@ public class RestTests {
     return new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType());
   }
 
-  private String getIssueStatus(int id) throws IOException {
-    String issueById = getExecutor().execute(Request.Get(String.format("https://bugify.stqa.ru/api/issues/%s.json", id))).returnContent().asString(); // {total
-    JsonElement parsed = new JsonParser().parse(issueById); //JsonObject {total
-    JsonElement issuesJson = parsed.getAsJsonObject().get("issues"); //JsonArray [{assignee
-    Set<Issue> issues = new Gson().fromJson( issuesJson, new TypeToken<Set<Issue>>(){}.getType());
-    Issue issue = issues.iterator().next();
-    String stateName = issue.getStateName();
-    return stateName;
-  }
-
-  private Executor getExecutor() {
-    return Executor.newInstance().auth("288f44776e7bec4bf44fdfeb1e646490", "");
-  }
-
   private int createIssue(Issue newIssue) throws IOException {
     String json =  getExecutor().execute(Request.Post("https://bugify.stqa.ru/api/issues.json")
             .bodyForm(new BasicNameValuePair("subject", newIssue.getSubject()),
@@ -60,18 +47,4 @@ public class RestTests {
     return parsed.getAsJsonObject().get("issue_id").getAsInt();
   }
 
-  public boolean isIssueOpen(int issueId) throws IOException {
-    String issueStatus = getIssueStatus(1280);
-    boolean isOpen;
-    if ((issueStatus.equals("Closed")) | (issueStatus.equals("Resolved"))) {
-      isOpen = false;
-    } else isOpen = true;
-    return isOpen;
-  }
-
-  public void skipIfNotFixed(int issueId) throws IOException {
-    if (isIssueOpen(issueId)) {
-      throw new SkipException("Ignored because of issue " + issueId);
-    }
-  }
 }
