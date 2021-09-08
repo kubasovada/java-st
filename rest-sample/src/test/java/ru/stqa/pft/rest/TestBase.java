@@ -19,6 +19,7 @@ public class TestBase {
     Set<Issue> issues = new Gson().fromJson( issuesJson, new TypeToken<Set<Issue>>(){}.getType());
     Issue issue = issues.iterator().next();
     String stateName = issue.getStateName();
+    System.out.println("StateName =  " + stateName);
     return stateName;
   }
 
@@ -41,3 +42,5 @@ public class TestBase {
     }
   }
 }
+
+

@@ -16,7 +16,7 @@ import static org.testng.Assert.assertEquals;
 public class RestTests extends TestBase {
   @Test(enabled = true)
   public void testCreateIssue() throws IOException {
-    skipIfNotFixed(1280);
+    skipIfNotFixed(2);
     Set<Issue> oldIssues = getIssues();
     Issue newIssue = new Issue().withSubject("TestIssue").withDescription("new Test Issue");
     int issueId =  createIssue(newIssue);
@@ -27,7 +27,9 @@ public class RestTests extends TestBase {
 
   @Test(enabled = false)
   public  void testStatus() throws IOException {
-    String issueStatus = getIssueStatus(1280);
+    int id = 2;
+    skipIfNotFixed(id);
+    String issueStatus = getIssueStatus(id);
     System.out.println("Статус задачи: "+ issueStatus);
   }
 
