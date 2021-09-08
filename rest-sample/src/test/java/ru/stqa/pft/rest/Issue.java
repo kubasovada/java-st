@@ -6,21 +6,32 @@ public class Issue {
   private int id;
   private String subject;
   private String description;
-  private String stateName;
-
-
+  private String state_name;
 
   public String getStateName() {
-    return stateName;
+    return state_name;
   }
 
-  public Issue withStateName(String stateName) {
-    this.stateName = stateName;
+  public Issue withStateName(String state_name) {
+    this.state_name = state_name;
     return this;
   }
 
   public int getId() {
     return id;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Issue issue = (Issue) o;
+    return id == issue.id && Objects.equals(subject, issue.subject) && Objects.equals(description, issue.description);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, subject, description);
   }
 
   public Issue withId(int id) {
@@ -54,18 +65,4 @@ public class Issue {
             ", description='" + description + '\'' +
             '}';
   }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Issue issue = (Issue) o;
-    return id == issue.id && Objects.equals(subject, issue.subject) && Objects.equals(description, issue.description) && Objects.equals(stateName, issue.stateName);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, subject, description, stateName);
-  }
-
 }

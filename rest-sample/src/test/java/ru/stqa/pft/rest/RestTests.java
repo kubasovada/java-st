@@ -4,16 +4,11 @@ import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import org.apache.http.client.fluent.Executor;
 import org.apache.http.client.fluent.Request;
-import org.apache.http.client.fluent.Response;
 import org.apache.http.message.BasicNameValuePair;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.math.BigInteger;
-import java.net.MalformedURLException;
-import java.rmi.RemoteException;
 import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
@@ -31,8 +26,8 @@ public class RestTests {
 
   @Test(enabled = true)
   public  void testStatus() throws IOException {
-    String issStat = getIssueStatus(80);
-    System.out.println(issStat);
+    String issueStatus = getIssueStatus(1280);
+    System.out.println("Статус задачи: "+ issueStatus);
   }
 
   private Set<Issue> getIssues() throws IOException {
@@ -48,12 +43,7 @@ public class RestTests {
     JsonElement issuesJson = parsed.getAsJsonObject().get("issues"); //JsonArray [{assignee
     Set<Issue> issues = new Gson().fromJson( issuesJson, new TypeToken<Set<Issue>>(){}.getType());
     Issue issue = issues.iterator().next();
-    System.out.println(issue);
     String stateName = issue.getStateName();
-    System.out.println(stateName);
-
-
-    System.out.println("Статус задачи: "+ stateName);
     return stateName;
   }
 
@@ -73,7 +63,7 @@ public class RestTests {
   public boolean isIssueOpen(int issueId) throws IOException {
     String issueStatus = getIssueStatus(1280);
     boolean isOpen;
-    if (issueStatus.equals("Closed")) {
+    if ((issueStatus.equals("Closed")) | (issueStatus.equals("Resolved"))) {
       isOpen = false;
     } else isOpen = true;
     return isOpen;
