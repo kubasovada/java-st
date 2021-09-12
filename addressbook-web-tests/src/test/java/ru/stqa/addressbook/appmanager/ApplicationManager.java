@@ -68,9 +68,9 @@ public class ApplicationManager {
     wd.quit();
   }
 
-  //public void logout() {
-  //  wd.findElement(By.linkText("Logout")).click();
-  //}
+//  public void logout() {
+//    wd.findElement(By.linkText("Logout")).click();
+//  }
 
   public GroupHelper group() { return groupHelper;  }
 
