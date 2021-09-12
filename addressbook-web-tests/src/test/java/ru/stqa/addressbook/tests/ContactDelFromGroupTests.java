@@ -28,7 +28,7 @@ public class ContactDelFromGroupTests extends TestBase{
     }
   }
 
-  @Test
+  @Test(enabled = false)
   public void testContactDeletionFromGroup() {
     ContactData contact = selectContact();
     GroupData groupForRemove = selectGroup(contact);
